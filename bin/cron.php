@@ -36,8 +36,14 @@ $mobs = array_reduce($mobs, function ($mobs, $mob) {
 }, []);
 
 echo "Downloading images...\n";
-foreach ($mobs as $mob) {
+foreach ($mobs as &$mob) {
+    echo "   ... " . $mob["name"] . "\n";
     $filename = downloadImage($mob["image"], $mob["name"]);
     $mob["filename"] = $filename;
-    var_dump($mob);
+}
+
+echo "Adding to database...\n";
+foreach ($mobs as &$mob) {
+    echo "   ... " . $mob["name"] . "\n";
+    addOrUpdateMob($mob["name"], $mob["filename"]);
 }

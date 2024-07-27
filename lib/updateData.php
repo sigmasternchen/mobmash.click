@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/request.php";
+require_once __DIR__ . "/database.php";
 
 function handleWikiRequest(string $args, bool $rvslots = true): array {
     $url = "https://minecraft.wiki/api.php?action=query&format=json&" . $args;
@@ -92,4 +93,20 @@ function downloadImage(string $url, string $mobname): string {
     fclose($file);
 
     return $name;
+}
+
+function addOrUpdateMob(string $name, string $filename) {
+    global $pdo;
+
+    $query = $pdo->prepare("SELECT name from mobs where name = ?");
+    $query->execute([$name]) or die("unable to check if mob exists");
+    if ($query->rowCount() == 0) {
+        $query = $pdo->prepare("INSERT INTO mobs (name, image) VALUES (?, ?)");
+        $query->execute([$name, $filename]) or die("unable to add new mob");
+        echo "      added\n";
+    } else {
+        $query = $pdo->prepare("UPDATE mobs SET image = ? WHERE name = ?");
+        $query->execute([$filename, $name]) or die("unable to update mob");
+        echo "      updated\n";
+    }
 }
