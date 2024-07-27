@@ -112,4 +112,24 @@ SELECT mob,
        last_update
 FROM rating;
 
-
+CREATE VIEW mm_current_rating(mob, rating, last_update) AS
+SELECT mob,
+       rating,
+       last_update
+FROM mm_rating
+WHERE last_update = (
+    (
+        SELECT max(matches_with_default.id) AS max
+        FROM (
+            SELECT
+                mm_matches_of_mob.id,
+                mm_matches_of_mob.mob
+                FROM mm_matches_of_mob
+            UNION
+            SELECT
+                0,
+                mm_rating.mob
+        ) matches_with_default
+        WHERE matches_with_default.mob = mm_rating.mob
+    )
+);

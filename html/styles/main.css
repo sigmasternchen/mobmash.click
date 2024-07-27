@@ -1,0 +1,22 @@
+.selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 800px;
+}
+
+.separator {
+    flex-grow: 1;
+}
+
+.mob {
+    background-color: green;
+    width: 40%;
+    flex-grow: 1;
+}
+
+.mob img {
+    width: 80%;
+}
