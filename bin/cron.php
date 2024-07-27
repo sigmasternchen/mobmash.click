@@ -10,7 +10,8 @@ echo "Filtering invalid entries...\n";
 $mobs = array_filter($mobs, fn ($mob) =>
     !str_starts_with($mob, "id=") &&
     !str_contains($mob, "Old ") &&
-    $mob != "NPC" && $mob != "Agent" &&
+    $mob != "NPC" &&
+    $mob != "Agent" &&
     !str_ends_with($mob, "Ghost") &&
     $mob != "Giant" &&
     $mob != "Killer Bunny"
@@ -21,6 +22,9 @@ $mobs = array_map(fn ($mob) => [
     "name" => $mob,
     "image" => getImage($mob)
 ], $mobs);
+
+echo "Removing non-existing images...\n";
+$mobs = array_filter($mobs, fn ($mob) => $mob["image"] != "");
 
 echo "Removing duplicates...\n";
 $mobs = array_reduce($mobs, function ($mobs, $mob) {

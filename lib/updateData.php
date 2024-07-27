@@ -69,7 +69,12 @@ function getImageUrlFromName(string $filename): string {
 }
 
 function getImage(string $name): string {
-    return getImageUrlFromName(getImageName($name));
+    $name = getImageName($name);
+    if ($name == "") {
+        return "";
+    } else {
+        return getImageUrlFromName($name);
+    }
 }
 
 function downloadImage(string $url, string $mobname): string {
