@@ -1,6 +1,6 @@
 <div class="mob">
-    <img src="/images/mobs/<?php echo $mob["image"] ?? "_placeholder.png"; ?>"><br />
-    <?php echo $mob["id"]; ?><br />
-    <?php echo $mob["name"]; ?><br />
-    <?php echo $mob["rating"]; ?><br />
+    <img src="/images/mobs/<?= $mob["image"] ?? "_placeholder.png"; ?>"><br />
+    <?= $mob["id"]; ?><br />
+    <?= $mob["name"]; ?><br />
+    <?= $mob["rating"]; ?><br />
 </div>

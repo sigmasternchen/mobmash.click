@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo $title ?? ""; ?></title>
+        <title><?= $title ?? ""; ?></title>
         <link rel="stylesheet" type="text/css" href="/styles/main.css" />
     </head>
     <body>
