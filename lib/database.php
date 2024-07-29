@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../credentials.php";
+require_once __DIR__ . "/../config.php";
 
 $dsn = "pgsql:host=" . POSTGRES_HOST . ";dbname=" . POSTGRES_DBNAME . ";port=" . POSTGRES_PORT;
 
