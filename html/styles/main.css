@@ -1,22 +1,59 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    background-color: red;
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
 .selection {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-left: 5%;
-    margin-right: 5%;
-    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90vw;
 }
 
 .separator {
     flex-grow: 1;
+    font-size: 5vw;
+    position: relative;
+}
+
+.separator div {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translate(0%, -50%);
 }
 
 .mob {
-    background-color: green;
-    width: 40%;
-    flex-grow: 1;
+    width: 40vw;
+    height: 42vw;
+    position: relative;
+}
+
+.mob h2 {
+    position: absolute;
+    width: 100%;
+    text-align: center;
 }
 
 .mob img {
-    width: 80%;
+    object-fit: contain;
+    width: 35vw;
+    height: 35vw;
+    margin-top: 5.5vw;
+    margin-left: 2.5vw;
 }

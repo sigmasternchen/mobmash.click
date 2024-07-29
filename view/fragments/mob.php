@@ -1,6 +1,4 @@
 <div class="mob">
-    <img src="/images/mobs/<?= $mob["image"] ?? "_placeholder.png"; ?>"><br />
-    <?= $mob["id"]; ?><br />
-    <?= $mob["name"]; ?><br />
-    <?= $mob["rating"]; ?><br />
+    <h2><?= $mob["name"]; ?></h2>
+    <img alt="<?= $mob["name"]; ?>" src="/images/mobs/<?= $mob["image"] ?? "_placeholder.png"; ?>">
 </div>
