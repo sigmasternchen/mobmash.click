@@ -1,15 +1,14 @@
 <?php
 
 require_once __DIR__ . "/../core.php";
-require_once __DIR__ . "/../lib/rating.php";
+require_once __DIR__ . "/../lib/pairing.php";
 
 session_start();
 
-$left = getRandomMob();
-$right = getRandomMob();
+$pairing = makeInitialPairing(session_id());
 
-$left["rating"] = getEloForMob($left["id"]);
-$right["rating"] = getEloForMob($right["id"]);
+$left = $pairing[0];
+$right = $pairing[1];
 
 $title = "Test";
 $content = function() use ($left, $right) {
