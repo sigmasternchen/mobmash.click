@@ -28,14 +28,16 @@ SELECT mm_matches.id,
        mm_matches.mob1fk     AS mob,
        mm_matches.mob2fk     AS opponent,
        mm_matches.winner = 1 AS won,
-       mm_matches.created
+       mm_matches.created,
+       mm_matches.session
 FROM mm_matches
 UNION
 SELECT mm_matches.id,
        mm_matches.mob2fk     AS mob,
        mm_matches.mob1fk     AS opponent,
        mm_matches.winner = 2 AS won,
-       mm_matches.created
+       mm_matches.created,
+       mm_matches.session
 FROM mm_matches;
 
 CREATE VIEW mm_rating(mob, rating, last_update) AS
