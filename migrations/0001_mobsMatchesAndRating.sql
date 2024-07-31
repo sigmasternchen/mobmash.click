@@ -40,98 +40,110 @@ SELECT mm_matches.id,
        mm_matches.session
 FROM mm_matches;
 
-CREATE VIEW mm_rating(mob, rating, last_update) AS
-WITH RECURSIVE rating(mob, rating, last_update) AS (
-    SELECT mm_mobs.id AS mob,
-           1500.0    AS rating,
-           0::bigint AS last_update
-    FROM mm_mobs
-    UNION
-    SELECT expectation.mob,
-           expectation.own_rating + 32::numeric * (
-               CASE
-                   WHEN expectation.won THEN 1
-                   ELSE 0
-               END::numeric - expectation.expectation) AS rating,
-            expectation.id                             AS last_update
-    FROM (
-        WITH newest_rating(mob, rating, last_update) AS (
-            SELECT
-                rating_with_row_number.mob,
-                rating_with_row_number.rating,
-                rating_with_row_number.last_update,
-                rating_with_row_number.row_number
-            FROM (
-                SELECT rating_for_row_number.mob,
-                    rating_for_row_number.rating,
-                    rating_for_row_number.last_update,
-                    row_number()
-                        OVER (
-                            PARTITION BY rating_for_row_number.mob
-                            ORDER BY rating_for_row_number.last_update DESC
-                        ) AS row_number
-                 FROM rating rating_for_row_number
-            ) rating_with_row_number
-            WHERE rating_with_row_number.row_number = 1)
+CREATE VIEW mm_current_rating(mob, rating) AS
+WITH RECURSIVE ratings_history (ratings, last_update) AS (
         SELECT
-            next_match.id,
-            mm_matches_of_mob.mob,
-            mm_matches_of_mob.won,
-            own_rating.rating      AS own_rating,
-            opponent_rating.rating AS opponent_rating,
-            (1::numeric /
-                (
-                    1::numeric +
-                        power(
-                            10::numeric,
-                            (
-                                opponent_rating.rating - own_rating.rating
-                            ) / 400::numeric
-                        )
-                )
-            ) AS expectation
-        FROM (
+            jsonb_object_agg(id, start_value) AS ratings,
+            0::bigint AS last_update
+        FROM mm_mobs
+        CROSS JOIN
+        (
             SELECT
-                min(matches_for_next_match.id) AS id,
-                matches_for_next_match.mob
-            FROM mm_matches_of_mob matches_for_next_match
-            JOIN newest_rating own_rating_1
-                ON matches_for_next_match.mob = own_rating_1.mob
-            WHERE matches_for_next_match.id > own_rating_1.last_update
-            GROUP BY matches_for_next_match.mob
-        ) next_match
-        JOIN mm_matches_of_mob
-            ON next_match.id = mm_matches_of_mob.id AND
-               next_match.mob = mm_matches_of_mob.mob
-        JOIN newest_rating own_rating
-            ON mm_matches_of_mob.mob = own_rating.mob
-        JOIN newest_rating opponent_rating
-            ON mm_matches_of_mob.opponent = opponent_rating.mob
-    ) expectation
+                1500 AS start_value
+        ) AS start_value
+        WHERE enabled
+    UNION ALL
+        SELECT
+            jsonb_set(
+                jsonb_set(
+                    ratings,
+                    ARRAY[mob1::text],
+                    to_jsonb(mob1rating)
+                ),
+                ARRAY[mob2::text],
+                to_jsonb(mob2rating)
+            ) AS ratings,
+            next_match AS last_update
+        FROM
+            (
+                SELECT
+                    next_match,
+                    ratings,
+                    mob1,
+                    mob2,
+                    winner,
+                    mob1rating + 32::numeric * (
+                        CASE
+                            WHEN winner = 1 THEN 1
+                            ELSE 0
+                        END::numeric - expectation
+                    ) AS mob1rating,
+                    mob2rating + 32::numeric * (
+                        CASE
+                            WHEN winner = 2 THEN 1
+                            ELSE 0
+                        END::numeric - expectation
+                    ) AS mob2rating
+                FROM
+                    (
+                        SELECT
+                            next_match,
+                            ratings,
+                            mob1,
+                            mob2,
+                            winner,
+                            mob1rating,
+                            mob2rating,
+                            (1::numeric /
+                                (1::numeric + power(
+                                    10::numeric,
+                                    (mob1rating - mob2rating) / 400::numeric
+                                ))
+                            ) AS expectation
+                        FROM
+                        (
+                            SELECT
+                                next_match.id AS next_match,
+                                next_match.ratings AS ratings,
+                                mm_matches.mob1fk AS mob1,
+                                mm_matches.mob2fk AS mob2,
+                                mm_matches.winner AS winner,
+                                cast(next_match.ratings->cast(mm_matches.mob2fk AS varchar) AS numeric) AS mob1rating,
+                                cast(next_match.ratings->cast(mm_matches.mob1fk AS varchar) AS numeric) AS mob2rating
+                            FROM
+                                (
+                                    SELECT
+                                        mm_matches.id,
+                                        ratings_history.ratings
+                                    FROM ratings_history
+                                    CROSS JOIN mm_matches
+                                    INNER JOIN mm_mobs AS mob
+                                        ON mob.id = mm_matches.mob1fk
+                                    INNER JOIN mm_mobs AS opponent
+                                        ON opponent.id = mm_matches.mob1fk
+                                    WHERE mm_matches.id > ratings_history.last_update
+                                        AND mob.enabled
+                                        AND opponent.enabled
+                                    ORDER BY mm_matches.id ASC
+                                    LIMIT 1
+                                ) AS next_match
+                            INNER JOIN mm_matches
+                                ON mm_matches.id = next_match.id
+                        ) AS match_with_ratings
+                    ) AS expectation
+                ) AS new_ratings
 )
-SELECT mob,
-       rating,
-       last_update
-FROM rating;
-
-CREATE VIEW mm_current_rating(mob, rating, last_update) AS
-SELECT mob,
-       rating,
-       last_update
-FROM mm_rating
-WHERE last_update = (
+SELECT
+    cast(key as numeric) as mob,
+    cast(value as numeric) as rating
+FROM jsonb_each(
     (
-        SELECT max(matches_with_default.id) AS max
-        FROM (
-            SELECT
-                mm_matches_of_mob.id,
-                mm_matches_of_mob.mob
-                FROM mm_matches_of_mob
-            UNION
-            SELECT
-                0,
-                mm_rating.mob
-        ) matches_with_default
-        WHERE matches_with_default.mob = mm_rating.mob
+        SELECT
+            ratings
+        FROM ratings_history
+        WHERE last_update = (
+            SELECT max(last_update)
+            FROM ratings_history
+        )
     )
 );
