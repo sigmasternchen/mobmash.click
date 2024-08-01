@@ -3,12 +3,14 @@
 require_once __DIR__ . "/../core.php";
 require_once __DIR__ . "/../lib/pairing.php";
 require_once __DIR__ . "/../lib/rating.php";
+require_once __DIR__ . "/../lib/security.php";
 
 function renderChoice(): void {
     [$left, $right] = [$_SESSION["left"], $_SESSION["right"]];
 
+    $csrfToken = $_SESSION["csrfToken"];
     $title = "Test";
-    $content = function() use ($left, $right) {
+    $content = function() use ($left, $right, $csrfToken) {
         include __DIR__ . "/../view/fragments/mobSelection.php";
     };
 
@@ -28,6 +30,10 @@ const LEFT = 0;
 const RIGHT = 1;
 
 function voteAndNextPairing(int $winner): array {
+    if ($_POST["csrfToken"] != $_SESSION["csrfToken"]) {
+        return [$_SESSION["left"], $_SESSION["right"]];
+    }
+
     addMatch($_SESSION["left"]["id"], $_SESSION["right"]["id"], $winner, session_id());
 
     $winnerMob = ($winner == 0) ? $_SESSION["left"] : $_SESSION["right"];
@@ -54,5 +60,6 @@ session_start();
 if ($render) {
     renderChoice();
 } else {
+    $_SESSION["csrfToken"] = makeCcrfToken();
     reload();
 }
