@@ -2,17 +2,57 @@
 
 require_once __DIR__ . "/../core.php";
 require_once __DIR__ . "/../lib/pairing.php";
+require_once __DIR__ . "/../lib/rating.php";
+
+function renderChoice(): void {
+    [$left, $right] = [$_SESSION["left"], $_SESSION["right"]];
+
+    $title = "Test";
+    $content = function() use ($left, $right) {
+        include __DIR__ . "/../view/fragments/mobSelection.php";
+    };
+
+    include __DIR__ . "/../view/layout.php";
+}
+
+function reload(): void {
+    header("LOCATION: /");
+    http_send_status(303);
+}
+
+function newPairing(): array {
+    return makeInitialPairing(session_id());
+}
+
+const LEFT = 0;
+const RIGHT = 1;
+
+function voteAndNextPairing(int $winner): array {
+    addMatch($_SESSION["left"]["id"], $_SESSION["right"]["id"], $winner, session_id());
+
+    $winnerMob = ($winner == 0) ? $_SESSION["left"] : $_SESSION["right"];
+
+    [$left, $right] = makeFollowUpPairing(session_id(), $winnerMob["id"]);
+    if (($winner == LEFT && $left["id"] != $winnerMob["id"]) ||
+        ($winner == RIGHT && $right["id"] != $winnerMob["id"])
+    ) {
+        [$left, $right] = [$right, $left];
+    }
+
+    return [$left, $right];
+}
 
 session_start();
 
-$pairing = makeInitialPairing(session_id());
-
-$left = $pairing[0];
-$right = $pairing[1];
-
-$title = "Test";
-$content = function() use ($left, $right) {
-    include __DIR__ . "/../view/fragments/mobSelection.php";
+[$_SESSION["left"], $_SESSION["right"], $render] = match (true) {
+    isset($_GET["new"]), !isset($_SESSION["left"]) => [...newPairing(), false],
+    isset($_GET["left"]) => [...voteAndNextPairing(LEFT), false],
+    isset($_GET["right"]) => [...voteAndNextPairing(RIGHT), false],
+    default => [$_SESSION["left"], $_SESSION["right"], true],
 };
 
-include __DIR__ . "/../view/layout.php";
+if ($render) {
+    renderChoice();
+} else {
+    reload();
+}
