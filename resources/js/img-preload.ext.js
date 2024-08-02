@@ -13,14 +13,9 @@ htmx.defineExtension('img-preload', {
             return;
         }
 
-        const getSpinners = () => [...document.querySelectorAll(
-            event.target.getAttribute("data-preload-spinner")
-            ?? ".img-preload"
-        )];
-
         switch (name) {
             case 'htmx:trigger':
-                getSpinners().forEach(s => s.classList.add("img-preload"));
+                [eval][0](event.target.getAttribute("data-loading-callback"));
                 break;
             case 'htmx:beforeOnLoad':
                 event.detail.shouldSwap = false;
@@ -42,7 +37,7 @@ htmx.defineExtension('img-preload', {
                             swapStyle: "outerHTML",
                             transition: true,
                         });
-                        getSpinners().forEach(s => s.classList.remove("img-preload"))
+                        [eval][0](event.target.getAttribute("data-loaded-callback"));
                     })
                     .catch(error => {
                         console.error('Error loading images:', error);
