@@ -93,6 +93,11 @@ h1 {
     text-align: center;
 }
 
+.mob input.fallback {
+    display: block;
+    margin: auto;
+}
+
 .mob img {
     object-fit: contain;
     width: 35vw;
