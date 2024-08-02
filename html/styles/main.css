@@ -15,6 +15,10 @@ h1 {
     text-align: center;
 }
 
+.choice {
+    position: relative;
+}
+
 .selection {
     display: flex;
     flex-direction: row;
@@ -26,11 +30,20 @@ h1 {
 
 .separator {
     flex-grow: 1;
-    font-size: 5vw;
     position: relative;
 }
 
-.separator .or, .separator .spinner {
+.middle {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    user-select: none;
+    z-index: -100;
+}
+
+.middle .or, .middle .spinner {
+    font-size: 5vw;
     position: absolute;
     top: 50%;
     width: 100%;
@@ -40,7 +53,7 @@ h1 {
     transition: opacity 0.5s;
 }
 
-.separator .spinner {
+.middle .spinner {
     opacity: 0;
 }
 
@@ -51,7 +64,7 @@ h1 {
     opacity: 0;
 }
 
-.separator .spinner img {
+.middle .spinner img {
     animation-name: spinner;
     animation-duration: 1s;
     animation-iteration-count: infinite;

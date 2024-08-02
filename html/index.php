@@ -10,12 +10,14 @@ function renderChoice(): void {
 
     $csrfToken = $_SESSION["csrfToken"];
 
-    if (isset($_GET["ajax"])) {
+    $ajax = isset($_GET["ajax"]);
+
+    if ($ajax) {
         include __DIR__ . "/../view/fragments/mobSelection.php";
     } else {
         $title = "Test";
         $content = function() use ($left, $right, $csrfToken) {
-            include __DIR__ . "/../view/fragments/mobSelection.php";
+            include __DIR__ . "/../view/pages/mobSelection.php";
         };
 
         include __DIR__ . "/../view/layout.php";

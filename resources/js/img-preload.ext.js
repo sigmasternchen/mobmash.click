@@ -4,18 +4,18 @@ console.log("module loaded");
 
 htmx.defineExtension('img-preload', {
     onEvent: (name, event) => {
-        if (event.target.getAttribute("hx-ext") !== "img-preload") {
+        if ((event?.target?.getAttribute("hx-ext") ?? "") !== "img-preload") {
             return;
         }
 
-        const spinner = [...document.querySelectorAll(
+        const getSpinners = () => [...document.querySelectorAll(
             event.target.getAttribute("data-preload-spinner")
             ?? ".img-preload"
         )];
 
         switch (name) {
             case 'htmx:trigger':
-                spinner.forEach(s => s.classList.add("img-preload"));
+                getSpinners().forEach(s => s.classList.add("img-preload"));
                 break;
             case 'htmx:beforeOnLoad':
                 event.detail.shouldSwap = false;
@@ -33,11 +33,11 @@ htmx.defineExtension('img-preload', {
 
                 Promise.all(imagePromises)
                     .then(() => {
-                        spinner.forEach(s => s.classList.remove("img-preload"));
                         htmx.swap(event.detail.target, event.detail.xhr.response, {
                             swapStyle: "outerHTML",
                             transition: true,
                         });
+                        getSpinners().forEach(s => s.classList.remove("img-preload"))
                     })
                     .catch(error => {
                         console.error('Error loading images:', error);
