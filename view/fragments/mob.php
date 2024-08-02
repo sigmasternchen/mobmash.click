@@ -10,7 +10,7 @@
         <input type="hidden" name="csrfToken" value="<?= $csrfToken ?>">
         <h2><?= $mob["name"]; ?></h2>
         <img alt="<?= $mob["name"]; ?>" src="/images/mobs/<?= $mob["image"] ?? "_placeholder.png"; ?>">
-        <script>document.getElementById("form-<?= $side ?>").style.cursor = "pointer";</script>
+        <script>setTimeout(() => { document.getElementById("form-<?= $side ?>").style.cursor = "pointer"; }, 1);</script>
         <noscript><input class="fallback" type="submit" value="<?= $mob["name"]; ?>"></noscript>
     </form>
 </div>

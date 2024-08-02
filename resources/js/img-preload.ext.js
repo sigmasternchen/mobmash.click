@@ -4,7 +4,12 @@ console.log("module loaded");
 
 htmx.defineExtension('img-preload', {
     onEvent: (name, event) => {
-        if ((event?.target?.getAttribute("hx-ext") ?? "") !== "img-preload") {
+        if (
+            (
+                event?.target?.getAttribute("hx-ext") ??
+                event?.target?.getAttribute("data-hx-ext" ?? "")
+            ) !== "img-preload"
+        ) {
             return;
         }
 
