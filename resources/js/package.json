@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "htmx.org": "^1.9.12"
+    "htmx.org": "^2.0.1"
   },
   "devDependencies": {
     "esbuild": "0.23.0"

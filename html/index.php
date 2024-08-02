@@ -9,16 +9,26 @@ function renderChoice(): void {
     [$left, $right] = [$_SESSION["left"], $_SESSION["right"]];
 
     $csrfToken = $_SESSION["csrfToken"];
-    $title = "Test";
-    $content = function() use ($left, $right, $csrfToken) {
-        include __DIR__ . "/../view/fragments/mobSelection.php";
-    };
 
-    include __DIR__ . "/../view/layout.php";
+    if (isset($_GET["ajax"])) {
+        include __DIR__ . "/../view/fragments/mobSelection.php";
+    } else {
+        $title = "Test";
+        $content = function() use ($left, $right, $csrfToken) {
+            include __DIR__ . "/../view/fragments/mobSelection.php";
+        };
+
+        include __DIR__ . "/../view/layout.php";
+    }
 }
 
 function reload(): void {
-    header("LOCATION: /");
+    if (isset($_GET["ajax"])) {
+        header("LOCATION: ?ajax");
+    } else {
+        header("LOCATION: /");
+    }
+
     http_send_status(303);
 }
 

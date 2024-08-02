@@ -30,13 +30,43 @@ h1 {
     position: relative;
 }
 
-.separator div {
+.separator .or, .separator .spinner {
     position: absolute;
     top: 50%;
     width: 100%;
     text-align: center;
     transform: translate(0%, -50%);
+    opacity: 1;
+    transition: opacity 0.5s;
 }
+
+.separator .spinner {
+    opacity: 0;
+}
+
+.img-preload .spinner {
+    opacity: 1;
+}
+.img-preload .or {
+    opacity: 0;
+}
+
+.separator .spinner img {
+    animation-name: spinner;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 .mob {
     width: 40vw;
