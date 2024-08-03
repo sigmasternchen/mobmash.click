@@ -48,7 +48,7 @@ function voteAndNextPairing(int $winner): array {
 
     addMatch($_SESSION["left"]["id"], $_SESSION["right"]["id"], $winner, session_id());
 
-    $winnerMob = ($winner == 0) ? $_SESSION["left"] : $_SESSION["right"];
+    $winnerMob = ($winner == LEFT) ? $_SESSION["left"] : $_SESSION["right"];
 
     [$left, $right] = makeFollowUpPairing(session_id(), $winnerMob["id"]);
     if (($winner == LEFT && $left["id"] != $winnerMob["id"]) ||
