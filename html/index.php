@@ -38,8 +38,8 @@ function newPairing(): array {
     return makeInitialPairing(session_id());
 }
 
-const LEFT = 0;
-const RIGHT = 1;
+const LEFT = 1;
+const RIGHT = 2;
 
 function voteAndNextPairing(int $winner): array {
     if ($_POST["csrfToken"] != $_SESSION["csrfToken"]) {
