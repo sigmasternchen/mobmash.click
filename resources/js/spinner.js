@@ -24,7 +24,7 @@ window.stopSpinner = () => {
 
 window.addEventListener("load", () => {
     document.querySelector(".middle .spinner img")
-        .addEventListener("animationend", () => {
+        ?.addEventListener("animationend", () => {
             endAnimation();
             if (spinnerActive) {
                 triggerAnimation();

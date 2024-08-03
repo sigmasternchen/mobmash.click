@@ -53,3 +53,26 @@ function getMobsWithMetaData($orderBy = "rating", $direction = "DESC"): array {
     $query->execute();
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getRatingTrends(): array {
+    global $pdo;
+    $query = $pdo->prepare(<<<EOF
+        SELECT * FROM mm_rating_trends
+        ORDER BY date ASC;
+    EOF
+    );
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $trends = [];
+    foreach ($results as $result) {
+        $trendsForMob = [];
+        if (isset($trends[$result['mob']])) {
+            $trendsForMob = $trends[$result['mob']];
+        }
+        $trendsForMob[] = $result;
+        $trends[$result['mob']] = $trendsForMob;
+    }
+
+    return $trends;
+}

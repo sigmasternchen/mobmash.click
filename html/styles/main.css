@@ -104,6 +104,6 @@ h1 {
     margin-left: 2.5vw;
 }
 
-.results-list img {
-    max-height: 25px;
+.results-list img, .results-list canvas {
+    height: 100px;
 }
