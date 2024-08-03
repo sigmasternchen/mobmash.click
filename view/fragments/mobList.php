@@ -10,9 +10,9 @@ function makeSortButton(string $field): void {
     if ($field == $orderColumn) {
         if ($orderDirection == "desc") {
             $direction = "asc";
-            $icon = "fa-sort-up";
-        } else {
             $icon = "fa-sort-down";
+        } else {
+            $icon = "fa-sort-up";
         }
     }
 
