@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+<?php
+    function makeNavigationLink(string $name, string $url) {
+        $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $targetPath = parse_url($url, PHP_URL_PATH);
+        $targetHost = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
+        $active = false;
+        if ($targetHost === NULL && $currentPath === $targetPath) {
+            $active = true;
+        }
+        ?>
+            <li class="menu-item <?= $active ? "active" : "" ?>"><a href="<?= $url ?>"><?= $name ?></a></li>
+        <?php
+    }
+?>
 <html lang="en">
     <head>
         <title><?= $title ?? ""; ?></title>
@@ -10,13 +24,13 @@
     <body>
         <nav data-hx-boost="true">
             <ul class="left">
-                <li><a href="/">MobMash</a></li>
-                <li><a href="/results">Results</a></li>
+                <?php makeNavigationLink("MobMash", "/"); ?>
+                <?php makeNavigationLink("Result", "/results"); ?>
             </ul>
             <ul class="right">
-                <li><a href="/about">About</a></li>
-                <li><a href="https://github.com/overflowerror/mobmash.click">Source</a></li>
-                <li><a href="/privacy">Privacy</a></li>
+                <?php makeNavigationLink("About", "/about"); ?>
+                <?php makeNavigationLink("Source", "https://github.com/overflowerror/mobmash.click"); ?>
+                <?php makeNavigationLink("Privacy", "/privacy"); ?>
             </ul>
         </nav>
         <?php

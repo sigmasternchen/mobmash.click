@@ -64,7 +64,7 @@ nav a:visited {
     color: white;
 }
 
-nav a:hover {
+nav a:hover, nav .active a {
     box-shadow: inset 130px 0 0 0 white;
     color: black;
 }
