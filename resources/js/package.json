@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild index.js --bundle --outfile=../../html/js/bundle.js",
+    "build": "esbuild index.js --bundle --outfile=../../html/js/bundle.js && npm run install-fontawesome",
+    "install-fontawesome": "cp ./node_modules/font-awesome/fonts/* ../../html/fonts/fontawesome/fonts/ && cp ./node_modules/font-awesome/css/font-awesome.css ../../html/fonts/fontawesome/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "chart.js": "^4.4.3",
+    "font-awesome": "^4.7.0",
     "htmx.org": "^2.0.1"
   },
   "devDependencies": {

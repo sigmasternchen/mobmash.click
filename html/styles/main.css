@@ -104,7 +104,12 @@ h1 {
     margin-left: 2.5vw;
 }
 
-.results-list img, .results-list canvas {
+.results-list img {
+    height: 100px;
+}
+
+.results-list .trend-container {
+    width: 400px;
     height: 100px;
 }
 
