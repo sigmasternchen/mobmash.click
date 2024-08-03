@@ -31,7 +31,7 @@ function makeSortButton(string $field): void {
     <thead>
         <tr>
             <th>
-                Position <?php makeSortButton("position"); ?>
+                Pos. <?php makeSortButton("position"); ?>
             </th>
             <th>
                 <!-- image -->
