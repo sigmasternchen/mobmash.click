@@ -15,3 +15,41 @@ function addMatch(int $mob1, int $mob2, int $winner, string $session): void {
     $query = $pdo->prepare("INSERT INTO mm_matches (mob1fk, mob2fk, winner, session) VALUES (?, ?, ?, ?)");
     $query->execute([$mob1, $mob2, $winner, $session]);
 }
+
+function getMobsWithMetaData($orderBy = "rating", $direction = "DESC"): array {
+    global $pdo;
+    $query = $pdo->prepare(<<<EOF
+        SELECT
+            row_number() OVER () AS position,
+            *
+        FROM (
+            SELECT
+                id,
+                name,
+                image,
+                created,
+                matches,
+                wins,
+                matches - wins AS losses,
+                rating
+            FROM mm_mobs
+            INNER JOIN (
+                SELECT 
+                    mob,
+                    count(*) AS matches,
+                    sum(CASE WHEN won THEN 1 ELSE 0 END) AS wins
+                FROM mm_matches_of_mob
+                GROUP BY mob
+            ) AS match_metadata
+                ON match_metadata.mob = mm_mobs.id
+            INNER JOIN mm_current_rating AS rating
+                ON rating.mob = mm_mobs.id
+            WHERE enabled
+            ORDER BY rating DESC
+        ) AS with_rating
+    EOF
+        . " ORDER BY " . $orderBy . " " . $direction
+    );
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}

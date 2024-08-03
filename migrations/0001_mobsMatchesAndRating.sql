@@ -171,3 +171,33 @@ FROM jsonb_each(
         )
     )
 );
+
+CREATE VIEW mm_rating_trends (mob, rating, "date", id) AS
+SELECT
+    key AS mob,
+    value AS rating,
+    "date",
+    id
+FROM (
+    SELECT
+        id,
+        ratings,
+        "date"
+    FROM (
+        SELECT
+            max(id) AS id,
+            "date"
+        FROM (
+            SELECT
+                last_update AS id,
+                date(matches.created) AS "date"
+            FROM mm_history_cache AS history
+            INNER JOIN mm_matches AS matches
+                ON history.last_update = matches.id
+        ) AS dates
+        GROUP BY "date"
+    ) AS key_dates
+    INNER JOIN mm_history_cache AS history
+        ON key_dates.id = history.last_update
+) AS ratings_at_key_date,
+jsonb_each(ratings_at_key_date.ratings) AS ratings(key, value);

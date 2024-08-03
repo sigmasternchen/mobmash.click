@@ -15,7 +15,7 @@ function renderChoice(): void {
     if ($ajax) {
         include __DIR__ . "/../view/fragments/mobSelection.php";
     } else {
-        $title = "Test";
+        $title = "MobMash";
         $content = function() use ($left, $right, $csrfToken) {
             include __DIR__ . "/../view/pages/mobSelection.php";
         };
