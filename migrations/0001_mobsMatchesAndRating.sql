@@ -97,13 +97,13 @@ WITH RECURSIVE ratings_history (ratings, last_update) AS (
                         CASE
                             WHEN winner = 1 THEN 1
                             ELSE 0
-                        END::numeric - expectation
+                        END::numeric - expectation_for_mob1
                     ) AS mob1rating,
                     mob2rating + 32::numeric * (
                         CASE
                             WHEN winner = 2 THEN 1
                             ELSE 0
-                        END::numeric - expectation
+                        END::numeric - (1 - expectation_for_mob1)
                     ) AS mob2rating
                 FROM
                     (
@@ -118,9 +118,9 @@ WITH RECURSIVE ratings_history (ratings, last_update) AS (
                             (1::numeric /
                                 (1::numeric + power(
                                     10::numeric,
-                                    (mob1rating - mob2rating) / 400::numeric
+                                    (mob2rating - mob1rating) / 400::numeric
                                 ))
-                            ) AS expectation
+                            ) AS expectation_for_mob1
                         FROM
                         (
                             SELECT
@@ -174,8 +174,8 @@ FROM jsonb_each(
 
 CREATE VIEW mm_rating_trends (mob, rating, "date", id) AS
 SELECT
-    key AS mob,
-    value AS rating,
+    cast(key AS numeric) AS mob,
+    cast(value AS numeric) rating,
     "date",
     id
 FROM (
