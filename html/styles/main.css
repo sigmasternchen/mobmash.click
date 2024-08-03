@@ -107,3 +107,21 @@ h1 {
 .results-list img, .results-list canvas {
     height: 100px;
 }
+
+.results-list {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.results-list td {
+    border: none;
+}
+
+.results-list tbody tr:nth-child(even) {
+    background-color: rgb(230, 230, 230);
+}
+
+.results-list tbody tr:nth-child(odd) {
+    background-color: white;
+}
