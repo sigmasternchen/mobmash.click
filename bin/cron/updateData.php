@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/../core.php";
-require_once __DIR__ . "/../lib/updateData.php";
+require_once __DIR__ . "/../../core.php";
+require_once __DIR__ . "/../../lib/updateData.php";
 
 echo "Loading mob list...\n";
 $mobs = getMobs();

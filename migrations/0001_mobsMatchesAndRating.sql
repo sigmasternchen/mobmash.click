@@ -23,6 +23,12 @@ create table mm_matches
     session varchar(255)
 );
 
+create table public.mm_history_cache
+(
+    ratings     jsonb  not null,
+    last_update bigint not null
+);
+
 CREATE VIEW mm_matches_of_mob(id, mob, opponent, won, created) AS
 SELECT mm_matches.id,
        mm_matches.mob1fk     AS mob,
@@ -40,18 +46,33 @@ SELECT mm_matches.id,
        mm_matches.session
 FROM mm_matches;
 
-CREATE VIEW mm_current_rating(mob, rating) AS
+CREATE VIEW mm_rating_history(ratings, last_update) AS
 WITH RECURSIVE ratings_history (ratings, last_update) AS (
+        WITH ratings_seed (ratings, last_update) AS (
+                SELECT
+                    jsonb_object_agg(id, start_value) AS ratings,
+                    0::bigint AS last_update
+                FROM mm_mobs
+                         CROSS JOIN
+                     (
+                         SELECT
+                             1500 AS start_value
+                     ) AS start_value
+                WHERE enabled
+            UNION ALL
+                SELECT
+                    ratings,
+                    last_update
+                FROM mm_history_cache
+        )
         SELECT
-            jsonb_object_agg(id, start_value) AS ratings,
-            0::bigint AS last_update
-        FROM mm_mobs
-        CROSS JOIN
-        (
-            SELECT
-                1500 AS start_value
-        ) AS start_value
-        WHERE enabled
+            ratings,
+            last_update
+        FROM ratings_seed
+        WHERE
+            last_update = (
+                SELECT max(last_update) FROM ratings_seed
+            )
     UNION ALL
         SELECT
             jsonb_set(
@@ -133,6 +154,9 @@ WITH RECURSIVE ratings_history (ratings, last_update) AS (
                     ) AS expectation
                 ) AS new_ratings
 )
+SELECT * from ratings_history;
+
+CREATE VIEW mm_current_rating(mob, rating) AS
 SELECT
     cast(key as numeric) as mob,
     cast(value as numeric) as rating
@@ -140,10 +164,10 @@ FROM jsonb_each(
     (
         SELECT
             ratings
-        FROM ratings_history
+        FROM mm_rating_history
         WHERE last_update = (
             SELECT max(last_update)
-            FROM ratings_history
+            FROM mm_rating_history
         )
     )
 );
