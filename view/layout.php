@@ -48,5 +48,6 @@
                 Minecraft content and materials on this site are trademarks and copyrights of <a href="https://www.minecraft.net/">Mojang Studios</a>.
             </p>
         </div>
+        <div id="version">v<?= VERSION ?></div>
     </body>
 </html>

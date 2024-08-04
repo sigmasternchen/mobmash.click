@@ -291,3 +291,10 @@ h2 {
 #disclaimer a, #disclaimer a:visited {
     color: grey;
 }
+
+#version {
+    position: fixed;
+    bottom: 0;
+    left: 2px;
+    font-size: 12px;
+}
