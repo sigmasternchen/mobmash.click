@@ -33,10 +33,12 @@
                 <?php makeNavigationLink("Privacy", "/privacy"); ?>
             </ul>
         </nav>
-        <?php
-            if (isset($content)) {
-                $content();
-            }
-        ?>
+        <div id="content">
+            <?php
+                if (isset($content)) {
+                    $content();
+                }
+            ?>
+        </div>
     </body>
 </html>

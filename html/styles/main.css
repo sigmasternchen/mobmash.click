@@ -15,6 +15,8 @@ nav {
     border-bottom: 1px solid black;
     margin: 0;
     display: block;
+    position: fixed;
+    top: 0;
 }
 
 nav ul {
@@ -69,11 +71,70 @@ nav a:hover, nav .active a {
     color: black;
 }
 
+#content {
+    padding-top: 50px;
+}
+
+.text-container {
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h1 {
     text-align: center;
     font-size: 40px;
     margin: 60px;
 }
+
+.text-container p, .text-container a, .text-container li {
+    font-family: "Arial", sans-serif;
+    line-height: 20px;
+}
+
+.text-container a, .text-container a:visited {
+    text-decoration: none;
+    color: black;
+    position: relative;
+    transition: color 0.3s;
+    padding-left: 6px;
+    padding-top: 2px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+}
+
+.text-container a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+    z-index: -2;
+}
+
+.text-container a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    bottom: 0;
+    background-color: lightgrey;
+    transition: width 0.3s;
+    z-index: -1;
+}
+
+.text-container a:hover {
+    color: white;
+}
+
+.text-container a:hover::before {
+    width: 0;
+}
+
+
 
 .choice {
     position: relative;
