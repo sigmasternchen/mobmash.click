@@ -63,6 +63,15 @@
         <a href="https://github.com/overflowerror/mobmash.click">Github</a>. Pull Requests are welcome!
     </p>
 
+    <h2 id="contact">Contact</h2>
+
+    <p>
+        In case you want to contact me regarding this website, please use the following email address:
+    </p>
+    <p>
+        <a href="mailto:<?= GENERAL_CONTACT_EMAIL ?>"><?= GENERAL_CONTACT_EMAIL ?></a>
+    </p>
+
     <h2 id="credits">Credits & Tech Stack</h2>
 
     <h3>Minecraft Related Content</h3>
