@@ -100,5 +100,9 @@
         I'd like to thank the <a href="https://minecraft.wiki/">Minecraft Wiki</a> for letting me let use their API to
         automatically update the mobs in the vote. The pictures for the mobs are also provided by them.
     </p>
+    <p>
+        Also, I'm very, very bad at design. So a big thanks goes to the web designer who helped me! (They would like
+        to stay anonymous. Apparently, the design is not good enough. ^^)
+    </p>
 
 </div>

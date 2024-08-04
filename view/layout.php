@@ -8,9 +8,7 @@
         if ($targetHost === NULL && $currentPath === $targetPath) {
             $active = true;
         }
-        ?>
-            <li class="menu-item <?= $active ? "active" : "" ?>"><a href="<?= $url ?>"><?= $name ?></a></li>
-        <?php
+        ?><li class="menu-item <?= $active ? "active" : "" ?>"><a href="<?= $url ?>"><?= $name ?></a></li><?php
     }
 ?>
 <html lang="en">
@@ -24,13 +22,17 @@
     <body>
         <nav data-hx-boost="true">
             <ul class="left">
-                <?php makeNavigationLink("MobMash", "/"); ?>
-                <?php makeNavigationLink("Result", "/results"); ?>
+                <?php
+                    makeNavigationLink("MobMash", "/");
+                    makeNavigationLink("Result", "/results");
+                ?>
             </ul>
             <ul class="right">
-                <?php makeNavigationLink("About", "/about"); ?>
-                <?php makeNavigationLink("Source", "https://github.com/overflowerror/mobmash.click"); ?>
-                <?php makeNavigationLink("Privacy", "/privacy"); ?>
+                <?php
+                    makeNavigationLink("About", "/about");
+                    makeNavigationLink("Source", "https://github.com/overflowerror/mobmash.click");
+                    makeNavigationLink("Privacy", "/privacy");
+                ?>
             </ul>
         </nav>
         <div id="content">

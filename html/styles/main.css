@@ -25,37 +25,32 @@ nav ul {
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 13px;
+    top: 0;
 }
 
 nav li {
     font-size: 20px;
     display: inline-block;
+    margin: 0;
+    padding: 0;
 }
 
 nav .left {
     left: 20px;
 }
 
-nav .left li {
-    padding-right: 30px;
-}
-
 nav .right {
     right: 20px;
 }
 
-nav .right li {
-    padding-left: 30px;
-}
-
 nav a {
+    margin: 0;
+    display: inline-block;
     text-decoration: none;
     color: white;
     box-shadow: inset 0 0 0 0 white;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 13px 25px;
 }
 
 nav a:active {
@@ -67,7 +62,7 @@ nav a:visited {
 }
 
 nav a:hover, nav .active a {
-    box-shadow: inset 130px 0 0 0 white;
+    box-shadow: inset 140px 0 0 0 white;
     color: black;
 }
 
@@ -87,9 +82,14 @@ h1 {
     margin: 60px;
 }
 
+h2 {
+    margin-top: 35px;
+    font-size: 25px;
+}
+
 .text-container p, .text-container a, .text-container li {
-    font-family: "Arial", sans-serif;
-    line-height: 20px;
+    font-size: 25px;
+    line-height: 32px;
 }
 
 .text-container a, .text-container a:visited {
@@ -97,10 +97,7 @@ h1 {
     color: black;
     position: relative;
     transition: color 0.3s;
-    padding-left: 6px;
-    padding-top: 2px;
-    padding-right: 6px;
-    padding-bottom: 2px;
+    padding: 4px 6px 2px;
 }
 
 .text-container a::after {
