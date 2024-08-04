@@ -13,7 +13,9 @@
         <img alt="<?= $mob["name"] ?>" src="/images/mobs/<?= $mob["image"] ?>" />
     </td>
     <td>
-        <?= $mob["name"] ?>
+        <a target="_blank" href="https://minecraft.wiki/w/<?= str_replace(" ", "_", $mob["name"]) ?>">
+            <?= $mob["name"] ?>
+        </a>
     </td>
     <td>
         <?= number_format($mob["rating"]) ?>

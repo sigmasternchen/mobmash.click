@@ -132,8 +132,6 @@ h2 {
     width: 0;
 }
 
-
-
 .choice {
     position: relative;
 }
@@ -271,6 +269,17 @@ h2 {
 
 .results-list tbody tr:nth-child(odd) {
     background-color: white;
+}
+
+.results-list td a, .results-list td a:visited {
+    text-decoration: none;
+    color: black;
+    transition: color 0.2s;
+}
+
+.results-list td a:hover {
+    color: grey;
+    text-decoration: underline;
 }
 
 #disclaimer p {
