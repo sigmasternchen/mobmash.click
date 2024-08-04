@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../config.php";
-
-const USER_AGENT = "MobMash Updater/" . VERSION . " (+https://github.com/overflowerror/mobmash.click; contact: " . CONTACT_EMAIL . ")";
+const USER_AGENT = "MobMash Updater/" . VERSION . " (+https://github.com/overflowerror/mobmash.click; contact: " . UPDATER_CONTACT_EMAIL . ")";
 
 function get(string $url): string {
     $curl = curl_init($url);

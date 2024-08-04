@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../../core.php';
 
-$title = "MobMash - About";
+$title = "MobMash - Privacy Notice";
 $content = function () {
-    require __DIR__ . '/../../view/pages/about.php';
+    require __DIR__ . '/../../view/pages/privacy.php';
 };
 
 require_once __DIR__ . '/../../view/layout.php';

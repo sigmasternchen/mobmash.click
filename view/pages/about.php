@@ -1,8 +1,7 @@
 <h1>About</h1>
 
 <div class="text-container">
-
-    <h2>The Story</h2>
+    <h2 id="story">The Story</h2>
 
     <p>
         Back when I was in school I watched <a href="https://en.wikipedia.org/wiki/The_Social_Network">
@@ -20,7 +19,7 @@
         - the previous version really was quite bad from a technical perspective.
     </p>
 
-    <h2>Implementation</h2>
+    <h2 id="implementation">Implementation</h2>
 
     <p>
         The basic idea is to give the users the choice between mobs. The better one is selected and its internal
@@ -64,7 +63,7 @@
         <a href="https://github.com/overflowerror/mobmash.click">Github</a>. Pull Requests are welcome!
     </p>
 
-    <h2>Credits & Tech Stack</h2>
+    <h2 id="credits">Credits & Tech Stack</h2>
 
     <h3>Minecraft Related Content</h3>
 
@@ -94,7 +93,7 @@
         <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
     </ul>
 
-    <h2>Special Thanks</h2>
+    <h2 id="thanks">Special Thanks</h2>
 
     <p>
         I'd like to thank the <a href="https://minecraft.wiki/">Minecraft Wiki</a> for letting me let use their API to
