@@ -12,8 +12,12 @@ function getEloForMob(int $mob): int {
 
 function addMatch(int $mob1, int $mob2, int $winner, string $session): void {
     global $pdo;
-    $query = $pdo->prepare("INSERT INTO mm_matches (mob1fk, mob2fk, winner, session) VALUES (?, ?, ?, ?)");
+    $query = $pdo->prepare("INSERT INTO mm_matches (mob1fk, mob2fk, winner, session) VALUES (?, ?, ?, ?) RETURNING id");
     $query->execute([$mob1, $mob2, $winner, $session]);
+
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    auditLog(AUDIT_EVENT_MATCH_ADDED, session_id(), $result["id"]);
 }
 
 function getMobsWithMetaData($orderBy = "rating", $direction = "DESC"): array {

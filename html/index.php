@@ -3,7 +3,8 @@
 require_once __DIR__ . "/../core.php";
 require_once __DIR__ . "/../lib/pairing.php";
 require_once __DIR__ . "/../lib/rating.php";
-require_once __DIR__ . "/../lib/security.php";
+
+ensureSession();
 
 function renderChoice(): void {
     [$left, $right] = [$_SESSION["left"], $_SESSION["right"]];
@@ -59,8 +60,6 @@ function voteAndNextPairing(int $winner): array {
 
     return [$left, $right];
 }
-
-session_start();
 
 [$_SESSION["left"], $_SESSION["right"], $render] = match (true) {
     isset($_GET["new"]), !isset($_SESSION["left"]) => [...newPairing(), false],

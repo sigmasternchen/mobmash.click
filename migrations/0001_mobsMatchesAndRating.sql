@@ -23,7 +23,7 @@ create table mm_matches
     session varchar(255)
 );
 
-create table public.mm_history_cache
+create table mm_history_cache
 (
     ratings     jsonb  not null,
     last_update bigint not null
@@ -201,3 +201,12 @@ FROM (
         ON key_dates.id = history.last_update
 ) AS ratings_at_key_date,
 jsonb_each(ratings_at_key_date.ratings) AS ratings(key, value);
+
+
+create table mm_audit_log
+(
+    time    timestamp default CURRENT_TIMESTAMP not null,
+    session varchar(255)                        not null,
+    event   varchar(255)                        not null,
+    details text
+);
