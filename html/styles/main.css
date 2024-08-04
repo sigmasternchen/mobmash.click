@@ -151,6 +151,25 @@ h2 {
     position: relative;
 }
 
+.separator .new-pairing {
+    position: absolute;
+    width: 100%;
+    bottom: 5vw;
+    text-align: center;
+}
+
+.separator .new-pairing a, .separator .new-pairing a:visited  {
+    text-decoration: none;
+    color: black;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.separator .new-pairing a:hover {
+    text-decoration: underline;
+}
+
 .middle {
     width: 100%;
     position: absolute;
