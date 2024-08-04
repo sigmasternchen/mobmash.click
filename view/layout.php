@@ -42,5 +42,11 @@
                 }
             ?>
         </div>
+        <div id="disclaimer">
+            <p>
+                This is not an official Minecraft website. We are not associated with Mojang or Microsoft.<br>
+                Minecraft content and materials on this site are trademarks and copyrights of <a href="https://www.minecraft.net/">Mojang Studios</a>.
+            </p>
+        </div>
     </body>
 </html>

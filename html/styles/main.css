@@ -74,6 +74,7 @@ nav a:hover, nav .active a {
     width: 70vw;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
 }
 
 h1 {
@@ -270,4 +271,14 @@ h2 {
 
 .results-list tbody tr:nth-child(odd) {
     background-color: white;
+}
+
+#disclaimer p {
+    font-size: 13px;
+    text-align: center;
+    color: grey;
+}
+
+#disclaimer a, #disclaimer a:visited {
+    color: grey;
 }
