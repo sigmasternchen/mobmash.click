@@ -47,3 +47,5 @@ foreach ($mobs as &$mob) {
     echo "   ... " . $mob["name"] . "\n";
     addOrUpdateMob($mob["name"], $mob["filename"]);
 }
+
+echo "Done.";
