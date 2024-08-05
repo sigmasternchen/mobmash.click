@@ -1,0 +1,66 @@
+name: 'Deploy to prod'
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+      - name: Install JS dependencies
+        run: |
+          cd resources/js
+          npm install
+      - name: Build JS
+        run: |
+          cd resources/js
+          npm run build
+      - name: Deploy
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+          POSTGRES_DBNAME: ${{ secrets.POSTGRES_DBNAME }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+
+          UPDATER_CONTACT_EMAIL: ${{ secrets.UPDATER_CONTACT_EMAIL }}
+          GENERAL_CONTACT_EMAIL: ${{ secrets.GENERAL_CONTACT_EMAIL }}
+          PRIVACY_CONTACT: ${{ secrets.PRIVACY_CONTACT }}
+          PRIVACY_CONTACT_EMAIL: ${{ secrets.PRIVACY_CONTACT_EMAIL }}
+        run: |
+          sudo apt install lftp
+          rm -rf .git .github
+          cp config.templ.php config.php
+          sed -i -e 's/%DBHOST%|'"$POSTGRES_HOST"'/g' config.php
+          sed -i -e 's/%DBNAME%|'"$POSTGRES_DBNAME'/g' config.php
+          sed -i -e 's/%DBUSER%|'"$POSTGRES_USER"'/g' config.php
+          sed -i -e 's/%DBPASSWORD%|'"$POSTGRES_PASSWORD"'/g' config.php
+          sed -i -e 's/%UPDATER_EMAIL%|'"$UPDATER_CONTACT_EMAIL"'/g' core.php
+          sed -i -e 's/%GENERAL_EMAIL%|'"$GENERAL_CONTACT_EMAIL"'/g' core.php
+          sed -i -e 's/%PRIVACY_CONTACT%|'"$PRIVACY_CONTACT"'/g' core.php
+          sed -i -e 's/%PRIVACY_EMAIL%|'"$PRIVACY_CONTACT_EMAIL"'' core.php
+          lftp -e "
+            set sftp:auto-confirm yes;
+            set ssl:verify-certificate no;
+            open -u ${FTP_USERNAME},${FTP_PASSWORD} sftp://${FTP_SERVER};
+            mirror -e -R ./ ./;
+            quit;
+          "
