@@ -1,3 +1,9 @@
+## 0.2.3 (2024-08-05)
+
+### Fix
+
+- Missing quote in deploy workflow
+
 ## 0.2.2 (2024-08-05)
 
 ### Fix
