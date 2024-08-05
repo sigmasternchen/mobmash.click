@@ -1,3 +1,9 @@
+## 0.2.8 (2024-08-05)
+
+### Fix
+
+- Replacement in wrong file in deploy workflow
+
 ## 0.2.7 (2024-08-05)
 
 ### Fix
