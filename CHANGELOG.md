@@ -1,3 +1,9 @@
+## 0.2.4 (2024-08-05)
+
+### Fix
+
+- Missing delimiter in regex in deploy workflow
+
 ## 0.2.3 (2024-08-05)
 
 ### Fix
