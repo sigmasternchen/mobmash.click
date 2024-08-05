@@ -1,3 +1,9 @@
+## 0.2.2 (2024-08-05)
+
+### Fix
+
+- Wrong sed syntax in deploy workflow
+
 ## 0.2.1 (2024-08-05)
 
 ### Fix
