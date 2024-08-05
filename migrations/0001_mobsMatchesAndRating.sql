@@ -129,8 +129,8 @@ WITH RECURSIVE ratings_history (ratings, last_update) AS (
                                 mm_matches.mob1fk AS mob1,
                                 mm_matches.mob2fk AS mob2,
                                 mm_matches.winner AS winner,
-                                cast(next_match.ratings->cast(mm_matches.mob2fk AS varchar) AS numeric) AS mob1rating,
-                                cast(next_match.ratings->cast(mm_matches.mob1fk AS varchar) AS numeric) AS mob2rating
+                                cast(next_match.ratings->cast(mm_matches.mob1fk AS varchar) AS numeric) AS mob1rating,
+                                cast(next_match.ratings->cast(mm_matches.mob2fk AS varchar) AS numeric) AS mob2rating
                             FROM
                                 (
                                     SELECT
