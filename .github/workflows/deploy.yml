@@ -56,7 +56,7 @@ jobs:
           sed -i -E 's/%UPDATER_EMAIL%/'"$UPDATER_CONTACT_EMAIL"'/g' core.php
           sed -i -E 's/%GENERAL_EMAIL%/'"$GENERAL_CONTACT_EMAIL"'/g' core.php
           sed -i -E 's/%PRIVACY_CONTACT%/'"$PRIVACY_CONTACT"'/g' core.php
-          sed -i -E 's/%PRIVACY_EMAIL%/'"$PRIVACY_CONTACT_EMAIL"'' core.php
+          sed -i -E 's/%PRIVACY_EMAIL%/'"$PRIVACY_CONTACT_EMAIL"'/g' core.php
           lftp -e "
             set sftp:auto-confirm yes;
             set ssl:verify-certificate no;
