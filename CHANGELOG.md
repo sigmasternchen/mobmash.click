@@ -1,3 +1,9 @@
+## 0.2.9 (2024-08-05)
+
+### Fix
+
+- Do not delete mob images when deploying
+
 ## 0.2.8 (2024-08-05)
 
 ### Fix
