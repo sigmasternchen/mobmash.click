@@ -49,14 +49,14 @@ jobs:
           sudo apt install lftp
           rm -rf .git .github
           cp config.templ.php config.php
-          sed -i -e 's/%DBHOST%|'"$POSTGRES_HOST"'/g' config.php
-          sed -i -e 's/%DBNAME%|'"$POSTGRES_DBNAME'/g' config.php
-          sed -i -e 's/%DBUSER%|'"$POSTGRES_USER"'/g' config.php
-          sed -i -e 's/%DBPASSWORD%|'"$POSTGRES_PASSWORD"'/g' config.php
-          sed -i -e 's/%UPDATER_EMAIL%|'"$UPDATER_CONTACT_EMAIL"'/g' core.php
-          sed -i -e 's/%GENERAL_EMAIL%|'"$GENERAL_CONTACT_EMAIL"'/g' core.php
-          sed -i -e 's/%PRIVACY_CONTACT%|'"$PRIVACY_CONTACT"'/g' core.php
-          sed -i -e 's/%PRIVACY_EMAIL%|'"$PRIVACY_CONTACT_EMAIL"'' core.php
+          sed -i -E 's/%DBHOST%/'"$POSTGRES_HOST"'/g' config.php
+          sed -i -E 's/%DBNAME%/'"$POSTGRES_DBNAME'/g' config.php
+          sed -i -E 's/%DBUSER%/'"$POSTGRES_USER"'/g' config.php
+          sed -i -E 's/%DBPASSWORD%/'"$POSTGRES_PASSWORD"'/g' config.php
+          sed -i -E 's/%UPDATER_EMAIL%/'"$UPDATER_CONTACT_EMAIL"'/g' core.php
+          sed -i -E 's/%GENERAL_EMAIL%/'"$GENERAL_CONTACT_EMAIL"'/g' core.php
+          sed -i -E 's/%PRIVACY_CONTACT%/'"$PRIVACY_CONTACT"'/g' core.php
+          sed -i -E 's/%PRIVACY_EMAIL%/'"$PRIVACY_CONTACT_EMAIL"'' core.php
           lftp -e "
             set sftp:auto-confirm yes;
             set ssl:verify-certificate no;
