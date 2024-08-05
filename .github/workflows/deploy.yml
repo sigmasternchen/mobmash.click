@@ -62,6 +62,6 @@ jobs:
             set sftp:auto-confirm yes;
             set ssl:verify-certificate no;
             open -u ${FTP_USERNAME},${FTP_PASSWORD} sftp://${FTP_SERVER};
-            mirror -e -R ./ ./;
+            mirror -e -R ./ ./ --exclude html/images/mobs/;
             quit;
           "
