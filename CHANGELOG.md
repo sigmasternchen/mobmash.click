@@ -1,3 +1,9 @@
+## 0.2.1 (2024-08-05)
+
+### Fix
+
+- We don't use a prefix in the version tag
+
 ## 0.2.0 (2024-08-05)
 
 ### Feat
