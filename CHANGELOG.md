@@ -1,3 +1,9 @@
+## 0.2.10 (2024-08-05)
+
+### Fix
+
+- Error in rating calculation
+
 ## 0.2.9 (2024-08-05)
 
 ### Fix
