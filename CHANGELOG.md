@@ -1,3 +1,9 @@
+## 0.2.7 (2024-08-05)
+
+### Fix
+
+- Initial pairing doesn't have csrf token yet
+
 ## 0.2.6 (2024-08-05)
 
 ### Fix
