@@ -47,7 +47,7 @@ jobs:
           PRIVACY_CONTACT_EMAIL: ${{ secrets.PRIVACY_CONTACT_EMAIL }}
         run: |
           sudo apt install lftp
-          rm -rf .git .github
+          rm -rf .git .github resources/
           cp config.templ.php config.php
           sed -i -E 's/%DBHOST%/'"$POSTGRES_HOST"'/g' config.php
           sed -i -E 's/%DBNAME%/'"$POSTGRES_DBNAME"'/g' config.php
@@ -57,6 +57,7 @@ jobs:
           sed -i -E 's/%GENERAL_EMAIL%/'"$GENERAL_CONTACT_EMAIL"'/g' core.php
           sed -i -E 's/%PRIVACY_CONTACT%/'"$PRIVACY_CONTACT"'/g' core.php
           sed -i -E 's/%PRIVACY_EMAIL%/'"$PRIVACY_CONTACT_EMAIL"'/g' core.php
+          ld -laR
           lftp -e "
             set sftp:auto-confirm yes;
             set ssl:verify-certificate no;
