@@ -36,7 +36,7 @@ function reload(): void {
 }
 
 function newPairing(): array {
-    if ($_REQUEST["csrfToken"] != $_SESSION["csrfToken"]) {
+    if (isset($_SESSION["csrfToken"]) && ($_REQUEST["csrfToken"] != $_SESSION["csrfToken"])) {
         return [$_SESSION["left"], $_SESSION["right"]];
     }
 
