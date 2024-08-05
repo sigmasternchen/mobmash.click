@@ -1,3 +1,9 @@
+## 0.2.5 (2024-08-05)
+
+### Fix
+
+- Remove resources folder before mirroring in deploy workflow + add debug output
+
 ## 0.2.4 (2024-08-05)
 
 ### Fix
