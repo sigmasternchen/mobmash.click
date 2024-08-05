@@ -1,3 +1,13 @@
+## 0.2.0 (2024-08-05)
+
+### Feat
+
+- Add housekeeping bin + slight restructure of cron jobs
+
+### Fix
+
+- Add missing configuration to config file
+
 ## 0.1.0 (2024-08-04)
 
 ### Feat
