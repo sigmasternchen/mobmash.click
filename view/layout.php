@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
-    function makeNavigationLink(string $name, string $url) {
-        $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $targetPath = parse_url($url, PHP_URL_PATH);
+    function makeNavigationLink(string $name, string $url): void {
+        $currentPath = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
+        $targetPath = rtrim(parse_url($url, PHP_URL_PATH), "/");
         $targetHost = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
         $active = false;
         if ($targetHost === NULL && $currentPath === $targetPath) {
