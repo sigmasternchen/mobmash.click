@@ -1,3 +1,9 @@
+## 0.4.1 (2024-08-06)
+
+### Fix
+
+- About links covering menu
+
 ## 0.4.0 (2024-08-06)
 
 ### Feat
