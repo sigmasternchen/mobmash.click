@@ -1,3 +1,10 @@
+## 0.3.0 (2024-08-06)
+
+### Feat
+
+- Add mobile version of results page
+- Add mobile version of homepage + menu
+
 ## 0.2.10 (2024-08-05)
 
 ### Fix
