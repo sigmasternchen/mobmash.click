@@ -1,3 +1,9 @@
+## 0.3.1 (2024-08-06)
+
+### Fix
+
+- Trailing slashes break the menu
+
 ## 0.3.0 (2024-08-06)
 
 ### Feat
