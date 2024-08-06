@@ -1,3 +1,14 @@
+## 0.4.0 (2024-08-06)
+
+### Feat
+
+- Add statistics to about page
+
+### Fix
+
+- Make everything smaller so mobile safari menu doesn't cover mobs
+- Potentially fix for color swap in telegram browser
+
 ## 0.3.1 (2024-08-06)
 
 ### Fix
