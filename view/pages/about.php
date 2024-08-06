@@ -1,3 +1,8 @@
+<?php
+    $stats ??= [];
+    $mobStats ??= [];
+?>
+
 <h1>About</h1>
 
 <div class="text-container">
@@ -61,6 +66,52 @@
     <p>
         If you want to learn more, check out the source code over on
         <a href="https://github.com/overflowerror/mobmash.click">Github</a>. Pull Requests are welcome!
+    </p>
+
+    <h2 id="statistics">Statistics</h2>
+
+    <p>
+        There are currently <?= $stats["mobs"] ?> mobs in the system.
+        The top ranked mob is "<?= $mobStats["highest_rating"]["name"] ?>" with a rating of
+        <?= number_format($mobStats["highest_rating"]["rating"]) ?>. Last place is
+        "<?= $mobStats["lowest_rating"]["name"] ?>" with a rating of
+        <?= number_format($mobStats["lowest_rating"]["rating"]) ?>.
+    </p>
+    <p>
+        "<?= $mobStats["most_matches"]["name"] ?>" has fought the most matches:
+        <?= $mobStats["most_matches"]["matches"] ?>, out of which it won <?= $mobStats["most_matches"]["wins"] ?>.
+        <?php if ($mobStats["most_matches"]["id"] == $mobStats["most_wins"]["id"]): ?>
+            Which also makes it the mob with the most wins.
+        <?php else: ?>
+            Speaking of wins: The mob with the most wins is "<?= $mobStats["most_wins"]["name"] ?>" with
+            <?= $mobStats["most_wins"]["wins"] ?> wins out of <?= $mobStats["most_wins"]["matches"] ?> matches.
+        <?php endif ?>
+    </p>
+    <p>
+        Until now, there have been <?= $stats["votes"] ?> votes.
+    </p>
+    <p>
+        Over the past 6 months, there have been <?= $stats["voters"] ?> unique voters. On average, each one voted
+        <?= number_format($stats["avg"], 1) ?> times with <?= $stats["max"] ?> <?= $stats["max"] > 80 ? "(You people are mad!)" : "" ?>
+        as the maximum.
+    </p>
+    <p>
+        <?php
+            if ($stats["maxed_out"] == 0) {
+        ?>
+            So far, none have voted for all <?= $stats["mobs"] * $stats["mobs"] ?> pairings yet. : (
+        <?php
+            } else if ($stats["maxed_out"] == 1) {
+        ?>
+            Coincidentally, that maximum is the highest possible number - this one person voted for every single paring. ^^
+        <?php
+            } else {
+        ?>
+            Coincidentally, that maximum is the highest possible number - <?= $stats["maxed_out"] ?> visitors voted for every
+            single paring. D:
+        <?php
+            }
+        ?>
     </p>
 
     <h2 id="contact">Contact</h2>
