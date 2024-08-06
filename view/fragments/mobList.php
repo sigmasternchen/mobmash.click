@@ -39,16 +39,16 @@ function makeSortButton(string $field): void {
             <th>
                 Name <?php makeSortButton("name"); ?>
             </th>
-            <th>
+            <th class="hide-on-mobile">
                 Rating <?php makeSortButton("rating"); ?>
             </th>
-            <th>
+            <th class="hide-on-mobile">
                 Matches <?php makeSortButton("matches"); ?>
             </th>
-            <th>
+            <th class="hide-on-mobile">
                 Wins <?php makeSortButton("wins"); ?>
             </th>
-            <th>
+            <th class="hide-on-mobile">
                 Losses <?php makeSortButton("losses"); ?>
             </th>
             <th>

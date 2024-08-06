@@ -6,7 +6,7 @@
     $uniqueSuffix = intval(microtime(true) * 1000) % 1000000;
 ?>
 <tr>
-    <td>
+    <td class="right">
         <?= $mob["position"] ?>
     </td>
     <td>
@@ -17,16 +17,16 @@
             <?= $mob["name"] ?>
         </a>
     </td>
-    <td>
+    <td class="hide-on-mobile right">
         <?= number_format($mob["rating"]) ?>
     </td>
-    <td>
+    <td class="hide-on-mobile right">
         <?= $mob["matches"] ?>
     </td>
-    <td>
+    <td class="hide-on-mobile right">
         <?= $mob["wins"] ?>
     </td>
-    <td>
+    <td class="hide-on-mobile right">
         <?= $mob["losses"] ?>
     </td>
     <td>
