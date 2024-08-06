@@ -385,7 +385,7 @@ h2 {
     }
 
     h1 {
-        font-size: 35px;
+        font-size: 30px;
         margin-top: 0;
         margin-bottom: 3vh;
     }
@@ -408,18 +408,19 @@ h2 {
     }
 
     .mob {
-        width: 25vh;
-        height: 30vh;
+        width: 24vh;
+        height: 27vh;
     }
 
     .mob h2 {
+        font-size: 20px;
         margin: 0;
     }
 
     .mob img {
-        width: 25vh;
-        height: 25vh;
-        margin-top: 5vh;
+        width: 24vh;
+        height: 24vh;
+        margin-top: 3vh;
         margin-left: 0;
     }
 
