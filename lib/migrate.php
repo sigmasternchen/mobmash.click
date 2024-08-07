@@ -11,7 +11,7 @@ function ensureMigrationsTable(): void {
 
     if ($pdo->query(<<<EOF
             SELECT tablename FROM pg_tables 
-            WHERE schemaname = 'public' AND tablename = '${MIGRATION_TABLE}'
+            WHERE schemaname = 'public' AND tablename = '{$MIGRATION_TABLE}'
         EOF
     )->rowCount() != 0) {
         return;
@@ -47,7 +47,7 @@ function getAppliedMigrations(): array {
     global $MIGRATION_TABLE;
 
     $result = $pdo->query(<<<EOF
-        SELECT * FROM ${MIGRATION_TABLE}
+        SELECT * FROM {$MIGRATION_TABLE}
     EOF);
 
     $migrations = [];
@@ -93,7 +93,7 @@ function applyMigration(int $id, string $file) {
     executeSqlScript($sql, $file);
 
     $statement = $pdo->prepare(<<<EOF
-        INSERT INTO ${MIGRATION_TABLE}
+        INSERT INTO {$MIGRATION_TABLE}
             (id, file) VALUES 
             (?, ?)
     EOF);
