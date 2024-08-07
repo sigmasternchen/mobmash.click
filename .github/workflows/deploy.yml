@@ -30,12 +30,7 @@ jobs:
           cd resources/js
           npm run build
       - name: Fetch Emoji
-        run: |
-          git clone -b gh-pages --depth=1 https://github.com/twitter/twemoji/
-          grep ".png" ./html/styles/emoji.css | sed -E 's/.*\/([^/]+)\..*/\1/g' | while read f; do
-            cp "./twemoji/36x36/$f.png" "./html/images/emoji/"
-          done
-          rm -rf twemoji
+        run: ./bin/setup/fetch-emoji.sh
       - name: Deploy
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
