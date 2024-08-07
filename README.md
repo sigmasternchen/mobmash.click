@@ -18,6 +18,7 @@ Minecraft content and materials are trademarks and copyrights of [Mojang Studios
 The mob names and images are fetched from the [Minecraft Wiki](https://minecraft.wiki/) (CC BY-NC-SA 3.0). - Thank you for letting me use your API!
 
 The font used is the [Minecraft Font by JDGraphics](https://www.fontspace.com/minecraft-font-f28180) (Public Domain). The icons are [Font Awesome v4.7.0](http://fontawesome.io/) (OFL-1.1 & MIT).
+The emoji are [Twemoji](https://github.com/twitter/twemoji/) (CC BY 4.0 & MIT).
 
 
 ## Contribution
