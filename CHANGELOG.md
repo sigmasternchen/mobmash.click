@@ -1,3 +1,9 @@
+## 0.5.1 (2024-08-07)
+
+### Fix
+
+- Deprecation warning for PHP 8.2
+
 ## 0.5.0 (2024-08-07)
 
 ### Feat
