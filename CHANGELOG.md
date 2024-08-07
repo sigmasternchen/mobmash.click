@@ -1,3 +1,16 @@
+## 0.5.0 (2024-08-07)
+
+### Feat
+
+- Update About page + README
+- Add emoji
+- Add robots.txt
+
+### Fix
+
+- Trends now not only depend on the history cache but also the current history
+- Open Github link in new tab
+
 ## 0.4.1 (2024-08-06)
 
 ### Fix
