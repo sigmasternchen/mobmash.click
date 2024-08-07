@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-    function makeNavigationLink(string $name, string $url): void {
+    function makeNavigationLink(string $name, string $url, bool $newTab = false): void {
         $currentPath = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
         $targetPath = rtrim(parse_url($url, PHP_URL_PATH), "/");
         $targetHost = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
@@ -8,7 +8,7 @@
         if ($targetHost === NULL && $currentPath === $targetPath) {
             $active = true;
         }
-        ?><li class="menu-item <?= $active ? "active" : "" ?>"><a href="<?= $url ?>"><?= $name ?></a></li><?php
+        ?><li class="menu-item <?= $active ? "active" : "" ?>"><a <?= $newTab ? 'target="_blank"' : '' ?> href="<?= $url ?>"><?= $name ?></a></li><?php
     }
 ?>
 <html lang="en">
@@ -35,7 +35,7 @@
             <ul class="right">
                 <?php
                     makeNavigationLink("About", "/about");
-                    makeNavigationLink("Source", "https://github.com/overflowerror/mobmash.click");
+                    makeNavigationLink("Source", "https://github.com/overflowerror/mobmash.click", true);
                     makeNavigationLink("Privacy", "/privacy");
                 ?>
             </ul>
