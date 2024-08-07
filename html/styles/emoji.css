@@ -1,0 +1,24 @@
+.emoji {
+    background-size: 1.1em 1.1em;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    margin-bottom: -0.1em;
+}
+
+.emoji.grinning-face-with-sweat {
+    background-image: url("/images/emoji/1f605.png");
+}
+
+.emoji.grinning-face-with-smiling-eyes {
+    background-image: url("/images/emoji/1f604.png");
+}
+
+.emoji.face-screaming-in-fear {
+    background-image: url("/images/emoji/1f631.png");
+}
+
+.emoji.disappointed-face {
+    background-image: url("/images/emoji/1f61e.png");
+}

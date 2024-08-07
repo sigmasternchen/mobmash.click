@@ -16,6 +16,7 @@
         <title><?= $title ?? ""; ?></title>
         <link rel="stylesheet" type="text/css" href="/styles/main.css" />
         <link rel="stylesheet" type="text/css" href="/styles/fonts.css" />
+        <link rel="stylesheet" type="text/css" href="/styles/emoji.css" />
         <link rel="stylesheet" type="text/css" href="/fonts/fontawesome/css/font-awesome.css" />
         <script type="application/javascript" src="/js/bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
