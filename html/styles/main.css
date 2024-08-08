@@ -328,9 +328,24 @@ h2 {
         right: 0;
         display: block;
         font-size: 40px;
-        padding: 10px;
         margin: 0;
-        transition: color 0.3s;
+    }
+
+    nav .hamburger i {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        transition: opacity 0.3s;
+    }
+
+    nav .hamburger .closed {
+        opacity: 1;
+    }
+
+    nav .hamburger .open {
+        opacity: 0;
+        right: 12px;
+        color: white;
     }
 
     nav .hamburger .checkbox {
@@ -348,8 +363,12 @@ h2 {
         background-color: black;
     }
 
-    nav:has(> .hamburger input[type="checkbox"]:checked) .hamburger {
-        color: white;
+    nav:has(> .hamburger input[type="checkbox"]:checked) .hamburger .open {
+        opacity: 1;
+    }
+
+    nav:has(> .hamburger input[type="checkbox"]:checked) .hamburger .closed {
+        opacity: 0;
     }
 
     nav ul {

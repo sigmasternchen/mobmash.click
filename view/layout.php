@@ -26,7 +26,8 @@
     <body>
         <nav data-hx-boost="true">
             <div class="hamburger">
-                <i class="fa fa-bars"></i>
+                <i class="closed fa fa-bars"></i>
+                <i class="open fa fa-times"></i>
                 <input type="checkbox" class="checkbox" />
             </div>
             <ul class="left">
