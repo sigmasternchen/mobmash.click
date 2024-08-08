@@ -12,7 +12,7 @@
     <td>
         <img alt="<?= $mob["name"] ?>" src="/images/mobs/<?= $mob["image"] ?>" />
     </td>
-    <td>
+    <td class="left">
         <a target="_blank" href="https://minecraft.wiki/w/<?= str_replace(" ", "_", $mob["name"]) ?>">
             <?= $mob["name"] ?>
         </a>

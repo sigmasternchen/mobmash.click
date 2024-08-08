@@ -251,6 +251,10 @@ h2 {
     padding-right: 15px;
 }
 
+.left {
+    padding-left: 10px;
+}
+
 .results-list img {
     height: 100px;
     object-fit: contain;
