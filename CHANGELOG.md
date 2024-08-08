@@ -1,3 +1,15 @@
+## 0.7.0 (2024-08-08)
+
+### Feat
+
+- Add dynamic favicons
+- Add padding between mob image and name in results page
+- Change hamburger menu to close button when menu open on mobile
+
+### Fix
+
+- Undefined function
+
 ## 0.6.0 (2024-08-08)
 
 ### Feat
