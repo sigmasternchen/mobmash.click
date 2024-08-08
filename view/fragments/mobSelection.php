@@ -1,5 +1,7 @@
 <div class="selection">
 <?php
+    $favicon ??= "";
+
     $mob = $left ?? [];
     $side = "left";
     include __DIR__ . "/mob.php";
@@ -21,4 +23,10 @@
     $side = "right";
     include __DIR__ . "/mob.php";
 ?>
+    <script>
+        (function() {
+            let favicon = document.querySelector("link[rel~='icon']");
+            favicon.href = "<?= $favicon ?>";
+        })();
+    </script>
 </div>

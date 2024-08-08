@@ -78,14 +78,16 @@ function getImage(string $name): string {
     }
 }
 
-function downloadImage(string $url, string $mobname): string {
+const IMAGE_BASE_PATH = __DIR__ . "/../html/images/";
+
+function downloadImage(string $url, string $mobname, string $path): string {
     $name = preg_replace(
         "/[^.]*(\.[a-zA-Z0-9]+).*/",
         strtolower(str_replace(" ", "_", $mobname)) . "$1",
         basename($url)
     );
 
-    $file = fopen(__DIR__ . "/../html/images/mobs/" . $name, "w");
+    $file = fopen(IMAGE_BASE_PATH . $path . "/" . $name, "w");
 
     $response = get($url);
 
@@ -109,4 +111,57 @@ function addOrUpdateMob(string $name, string $filename) {
         $query->execute([$filename, $name]) or die("unable to update mob");
         echo "      updated\n";
     }
+}
+
+function getSpawnEggsImages(): array {
+    $wikiPage = handleWikiRequest("titles=Spawn_Egg&prop=revisions&rvprop=content");
+    $wikiText = getWikiTextFromResponse($wikiPage);
+
+    [, $iconSection] = explode("=== Icons ===", $wikiText);
+    [$iconSection, ] = explode("===", $iconSection);
+
+    $matches = [];
+    preg_match_all("/([a-zA-Z0-9_ -]+.png)/", $iconSection, $matches);
+
+    return array_filter(
+        array_map(
+            fn ($image) => [
+                "name" => trim(
+                    str_replace("Spawn Egg.png", "", $image)
+                ) ?: "Spawn Egg",
+                "image" => getImageUrlFromName($image)
+            ],
+            array_filter(
+                array_unique($matches[1]),
+                fn($image) => !str_contains($image, "BE")
+            )
+        ),
+        fn ($image) => !!$image["image"]
+    );
+}
+
+function makeChimera(array $left, array $right, string $path): string
+{
+    $imageLeft = new Imagick(IMAGE_BASE_PATH . $path . "/" . $left["filename"]);
+    $imageRight = new Imagick(IMAGE_BASE_PATH . $path . "/" . $right["filename"]);
+
+    $height = min($imageLeft->getImageHeight(), $imageRight->getImageHeight());
+    $imageLeft->resizeImage(0, $height, Imagick::FILTER_LANCZOS, 1);
+    $imageLeft->cropImage($height / 2, $height, 0, 0);
+    $imageRight->resizeImage(0, $height, Imagick::FILTER_LANCZOS, 1);
+    $imageRight->cropImage($height / 2, $height, $height / 2, 0);
+
+    $chimera = new Imagick();
+    $chimera->newImage($height, $height, new ImagickPixel("transparent"));
+    $chimera->compositeImage($imageLeft, Imagick::COMPOSITE_DEFAULT, 0, 0);
+    $chimera->compositeImage($imageRight, Imagick::COMPOSITE_DEFAULT, $height / 2, 0);
+
+    $name = strtolower(str_replace(" ", "_", $left["name"] . "  " . $right["name"] . ".png"));
+
+    $chimera->setImageFormat('png');
+    $chimera->writeImage(IMAGE_BASE_PATH . $path . "/chimera/" . $name);
+
+    $chimera->destroy();
+
+    return $name;
 }

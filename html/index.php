@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../core.php";
 require_once __DIR__ . "/../lib/pairing.php";
 require_once __DIR__ . "/../lib/rating.php";
+require_once __DIR__ . "/../lib/favicon.php";
 
 ensureSession();
 
@@ -13,12 +14,15 @@ function renderChoice(): void {
 
     $ajax = isset($_GET["ajax"]);
 
+    $favicon = getFaviconUrl($left, $right);
+
     if ($ajax) {
         include __DIR__ . "/../view/fragments/mobSelection.php";
     } else {
         $title = "MobMash - Vote";
         $description = "Which Minecraft mob is the best? Vote for your favorite mob. MobMash uses a chess rating algorithm to calculate a definitive ranking.";
-        $content = function() use ($left, $right, $csrfToken) {
+
+        $content = function() use ($left, $right, $csrfToken, $favicon) {
             include __DIR__ . "/../view/pages/mobSelection.php";
         };
 

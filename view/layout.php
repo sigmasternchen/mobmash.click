@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+    $favicon ??= "/images/eggs/spawn_egg.png";
+
     function makeNavigationLink(string $name, string $url, bool $newTab = false): void {
         $currentPath = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
         $targetPath = rtrim(parse_url($url, PHP_URL_PATH), "/");
@@ -17,6 +19,7 @@
         <meta name="description" content="<?= $description ?? "" ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
+        <link rel="icon" type="image/png" href="<?= $favicon ?>">
         <link rel="stylesheet" type="text/css" href="/styles/main.css" />
         <link rel="stylesheet" type="text/css" href="/styles/fonts.css" />
         <link rel="stylesheet" type="text/css" href="/styles/emoji.css" />
