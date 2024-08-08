@@ -26,6 +26,7 @@ if (isset($_GET["ajax"])) {
     require __DIR__ . '/../../view/fragments/mobList.php';
 } else {
     $title = "MobMash - Results";
+    $description = "Which Minecraft mob is the best? Let's take a look at how people votes. These are the results.";
     $content = function () use ($mobs, $trends) {
         require __DIR__ . '/../../view/pages/results.php';
     };

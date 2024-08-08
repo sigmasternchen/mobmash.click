@@ -16,7 +16,8 @@ function renderChoice(): void {
     if ($ajax) {
         include __DIR__ . "/../view/fragments/mobSelection.php";
     } else {
-        $title = "MobMash";
+        $title = "MobMash - Vote";
+        $description = "Which Minecraft mob is the best? Vote for your favorite mob. MobMash uses a chess rating algorithm to calculate a definitive ranking.";
         $content = function() use ($left, $right, $csrfToken) {
             include __DIR__ . "/../view/pages/mobSelection.php";
         };
