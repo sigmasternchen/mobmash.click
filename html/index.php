@@ -32,12 +32,10 @@ function renderChoice(): void {
 
 function reload(): void {
     if (isset($_GET["ajax"])) {
-        header("LOCATION: ?ajax");
+        header("LOCATION: ?ajax", true, 303);
     } else {
-        header("LOCATION: /");
+        header("LOCATION: /", true, 303);
     }
-
-    http_send_status(303);
 }
 
 function newPairing(): array {
