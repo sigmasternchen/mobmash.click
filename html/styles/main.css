@@ -246,19 +246,19 @@ h2 {
     margin-left: 2.5vw;
 }
 
-.right {
-    text-align: right;
-    padding-right: 15px;
-}
-
-.left {
-    padding-left: 10px;
-}
-
 .results-list img {
     height: 100px;
     object-fit: contain;
     width: 100px;
+}
+
+.results-list .right {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.results-list .left {
+    padding-left: 10px;
 }
 
 .results-list .trend-container {
