@@ -1,3 +1,15 @@
+## 1.0.0 (2024-08-09)
+
+### Feat
+
+- 1.0.0 release
+- Update favicon when navigating with hx-boost
+
+### Fix
+
+- Background not working with linebreak in link
+- Wrong padding in mobile menu
+
 ## 0.7.0 (2024-08-08)
 
 ### Feat
