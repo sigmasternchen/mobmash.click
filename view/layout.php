@@ -27,6 +27,12 @@
         <script type="application/javascript" src="/js/bundle.js"></script>
     </head>
     <body>
+        <script>
+            (function() {
+                let favicon = document.querySelector("link[rel~='icon']");
+                favicon.href = "<?= $favicon ?>";
+            })();
+        </script>
         <nav data-hx-boost="true">
             <div class="hamburger">
                 <i class="closed fa fa-bars"></i>
