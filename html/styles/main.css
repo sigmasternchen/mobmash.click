@@ -103,39 +103,15 @@ h2 {
     text-decoration: none;
     color: black;
     position: relative;
-    transition: color 0.3s;
+    background-color: lightgray;
+    transition: color 0.3s, background-color 0.3s;
     padding: 4px 6px 2px;
 }
 
-.text-container a::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: black;
-    z-index: -2;
-}
-
-.text-container a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    bottom: 0;
-    background-color: lightgrey;
-    transition: width 0.3s;
-    z-index: -1;
-}
 
 .text-container a:hover {
     color: white;
-}
-
-.text-container a:hover::before {
-    width: 0;
+    background-color: black;
 }
 
 .choice {
