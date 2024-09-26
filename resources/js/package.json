@@ -16,6 +16,6 @@
     "htmx.org": "^2.0.2"
   },
   "devDependencies": {
-    "esbuild": "0.23.1"
+    "esbuild": "0.24.0"
   }
 }
