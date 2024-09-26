@@ -6,6 +6,8 @@ Visitors are prompted with two mobs and should decide which one they like better
 replaced with a new candidate. In the background, an Elo-style rating system is keeping track of the individual matches. 
 The rating also determines the next candidate - similar ratings are paired up. Within one session, pairings are not repeated.
 
+I posted a deep-dive on how the rating system is implemented over on [my blog](https://blog.sigma-star.io/2024/09/elo-rating-in-pure-sql/).
+
 ## Tech Stack
 
 - [Chart.js](https://www.chartjs.org/) (MIT)

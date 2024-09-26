@@ -79,7 +79,9 @@
         to delete the corresponding cache entries. It's not a huge deal, but certainly something to be aware of.
     </p>
     <p>
-        If you would like to learn more, check out the source code over on
+        If you would like to learn more, I posted an article about the details over on
+        <a target="_blank" href="https://blog.sigma-star.io/2024/09/elo-rating-in-pure-sql/">my blog</a>.
+        You can also check out the source code on
         <a target="_blank" href="https://github.com/overflowerror/mobmash.click">GitHub</a>. Pull Requests are welcome!
     </p>
 
